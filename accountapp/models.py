@@ -21,6 +21,7 @@ class UserTypeModel(models.Model):
 
 class UserModel(AbstractUser):
     
+    
     def __str__(self):
         return self.username
 
