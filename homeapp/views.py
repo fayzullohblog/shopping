@@ -4,11 +4,47 @@ from shopapp.models import  AdvertisModel
 from homeapp.models import ProductModel
 
 def index(request):
-    advertismodel= AdvertisModel.objects.all()[:1]
-    context={'advertismodel':advertismodel}
+    # <!-- Section Title & Tab End -->
 
+    advertismodel= AdvertisModel.objects.get(id=1)
+    productmodel=ProductModel.objects.all().order_by('?')[:8]
+    productmodel_new_arrivals=ProductModel.objects.all().order_by('-create_date')[:8]
+    productmodel_top_rated=ProductModel.objects.all()
+    # productmodel_top_ratedning eng  kuringan va like bosilganlarni qilib pages junatiladi
+    # <!-- Section Title & Tab End -->
+    # <!-- Feature product area start -->
+    productmodelcount=productmodel_top_rated.count()
+    print('sni',productmodelcount)
+    product_model_area=ProductModel.objects.last()
+
+    # print('----',product_model_area)
+    
+   
+    # <!-- Feature product area start -->
+        
+        
+
+    context={
+            'advertismodel':advertismodel,
+            'productmodel':productmodel,
+            'productmodel_new_arrivals':productmodel_new_arrivals,
+            'productmodel_top_rated':productmodel_top_rated,
+            'product_model_area':product_model_area,
+            
+            }
+    # for i in productmodel_top_rated:
+    print(productmodel_top_rated)
+    
+        
+   
+   
+
+
+
+
+    
     return render(request=request,template_name='index.html',context=context)
-
+ 
 def index2(request):
     return render(request=request,template_name='index2.html')
 

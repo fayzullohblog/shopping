@@ -68,7 +68,7 @@ def registerview(request):
                 )
             print('email',email)
       
-            user.set_password('password')
+            user.set_password(password)
             user.save()
             return redirect('loginview')
     

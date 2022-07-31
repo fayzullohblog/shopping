@@ -7,8 +7,10 @@ class ProductModel(models.Model):
     image=models.ImageField(upload_to='ProductModel_Image')
     price=models.CharField(max_length=15)
     create_date=models.DateTimeField(auto_now=True)
+    newprice=models.CharField(max_length=15)
     count=models.PositiveIntegerField(default=0)
     discount=models.PositiveIntegerField(default=0)
+
 
     def __str__(self):
         return self.title

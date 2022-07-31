@@ -10,7 +10,6 @@ class ProfileModel(models.Model):
     
     def __str__(self):
         return self.order
-
    
 
 class UserTypeModel(models.Model):
