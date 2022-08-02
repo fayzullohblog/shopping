@@ -238,11 +238,7 @@
                     
                    <h1>
                        
-                       {% for post in imageproductmodel %}
-                          
-                       {{ post.title }}
-                       {% endfor %}
-                          
+                       
                       
                          
 
@@ -254,16 +250,15 @@
                     <div class="top-content">
                         <h4 class="title"><a href="single-product.html">{{ product_model_area.title }} </a></h4>
                         <span class="price">
-                    <span class="old"><del>{{ product_model_area.price }}</del></span>
-                        <span class="new">{{ product_model_area.price }}/span>
+                    <span class="old" style="color:rgb(255, 0, 0) " ><del>{{ product_model_area.price }}</del></span>
+                        <span class="new"  style="color:rgb(8, 156, 47) ">{{ product_model_area.newprice }}</span>
                         </span>
                     </div>
                     <div class="bottom-content">
                         <div class="deal-timing">
-                            <div data-countdown="2021/09/15"></div>
+                            <div data-countdown='{{ date_time.microsecond }}/3/3'></div>
                         </div>
-                        <a href="single-product-variable.html" class="btn btn-primary  m-auto"> Shop
-                            Now </a>
+                        <a href="single-product-variable.html" class="btn btn-primary  m-auto"> Shop now</a>
                     </div>
                 </div>
             </div>
@@ -271,7 +266,7 @@
                 <div class="feature-right-content">
 
                     <div class="image-side">
-                        <img src="assets/images/feature-image/2.webp" alt=""> 
+                        <img src={{ product_area_minprice.image.url }} alt=""> 
                         <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
                             class="pe-7s-shopbag"></i></button>
                     </div>
@@ -279,15 +274,15 @@
                     <div class="content-side">
                         <div class="deal-timing">
                             <span>End In:</span>
-                            <div data-countdown="2021/09/15"></div>
+                            <div data-countdown="23434/45/13"></div>
                       </div>
 
 
                         <div class="prize-content">
-                            <h5 class="title"><a href="single-product.html">Ladies Smart Watch</a></h5>
+                            <h5 class="title"><a href="single-product.html">{{ product_area_minprice.title }}</a></h5>
                             <span class="price">
-                    <span class="old">$48.50</span>
-                            <span class="new">$38.50</span>
+                    <span class="old">$ {{ product_area_minprice.price }}</span>
+                            <span class="new">${{ product_area_minprice.newprice }}</span>
                             </span>
                         </div>
                         <div class="product-feature">
@@ -300,27 +295,32 @@
                         </div>
                     </div>
                 </div>
+                
+                {% for post in minproduct %}
+                    
+               
+                    
                 <div class="feature-right-content mt-30px">
                     <div class="image-side">
-                        <img src="assets/images/feature-image/3.webp" alt="">
+                        <img src={{ post.image.url }} alt="">
                         <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
                             class="pe-7s-shopbag"></i></button>
                     </div>
                     <div class="content-side">
                         <div class="deal-timing">
                             <span>End In:</span>
-                            <div data-countdown="2021/09/15"></div>
+                            <div data-countdown="4545/09/15"></div>
                         </div>
                         <div class="prize-content">
-                            <h5 class="title"><a href="single-product.html">Ladies Smart Watch</a></h5>
+                            <h5 class="title"><a href="single-product.html">{{ post.title }}</a></h5>
                             <span class="price">
-                    <span class="old">$48.50</span>
-                            <span class="new">$38.50</span>
+                    <span class="old">${{ post.price }}</span>
+                            <span class="new">${{post.newprice}}</span>
                             </span>
                         </div>
                         <div class="product-feature">
                             <ul>
-                                <li>Predecessor : <span>None.</span></li>
+                                <li>Price : <span>the best cheap price </span></li>
                                 <li>Support Type : <span>Neutral.</span></li>
                                 <li>Cushioning : <span>High Energizing.</span></li>
                                 <li>Total Weight : <span> 300gm</span></li>
@@ -328,6 +328,7 @@
                         </div>
                     </div>
                 </div>
+                 {% endfor %}
             </div>
         </div>
     </div>

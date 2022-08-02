@@ -2,7 +2,12 @@ import re
 from django.shortcuts import render
 from shopapp.models import  AdvertisModel
 from homeapp.models import ProductModel
-
+from datetime import datetime
+# delta=timedelta(
+#    hours=8,
+#    minutes=50,
+#    seconds=50,
+# )
 def index(request):
     # <!-- Section Title & Tab End -->
 
@@ -10,12 +15,24 @@ def index(request):
     productmodel=ProductModel.objects.all().order_by('?')[:8]
     productmodel_new_arrivals=ProductModel.objects.all().order_by('-create_date')[:8]
     productmodel_top_rated=ProductModel.objects.all()
+    date_time=datetime(year=1,month=2,day=2,hour=4,minute=50,second=20,microsecond=34354)
     # productmodel_top_ratedning eng  kuringan va like bosilganlarni qilib pages junatiladi
     # <!-- Section Title & Tab End -->
     # <!-- Feature product area start -->
-    productmodelcount=productmodel_top_rated.count()
-    print('sni',productmodelcount)
     product_model_area=ProductModel.objects.last()
+    product_area_minprice=ProductModel.objects.all()
+    productprice=[]
+    for i in range(1,product_area_minprice.count()+1):
+      
+        productprice.append(int((ProductModel.objects.get(id=i).price)))
+
+    minprice=min(productprice)
+    minproduct=ProductModel.objects.filter(price=minprice)
+    print('minprice',minprice)
+    print('minprocut',minproduct)
+    print('----',product_model_area)
+
+
 
     # print('----',product_model_area)
     
@@ -30,10 +47,12 @@ def index(request):
             'productmodel_new_arrivals':productmodel_new_arrivals,
             'productmodel_top_rated':productmodel_top_rated,
             'product_model_area':product_model_area,
+            'date_time':date_time,
+            'minproduct':minproduct,
             
             }
     # for i in productmodel_top_rated:
-    print(productmodel_top_rated)
+
     
         
    
