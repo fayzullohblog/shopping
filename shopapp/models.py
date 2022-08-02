@@ -52,8 +52,12 @@ class InformationModel(models.Model):
         return self.title
 
 class CartModel(models.Model):
-    owner=models.ForeignKey(UserModel,related_name='cartmodels',on_delete=models.SET_NULL,null=True)
-    order=models.BooleanField(default=False)
+    title=models.CharField(max_length=50)
+    image=models.ImageField(upload_to='CartModelImage')
+    price=models.CharField(max_length=15)
+    cart_count=models.PositiveIntegerField(default=0)
+    owner=models.CharField(max_length=50,null=True,blank=True)
+   
   
     def __str__(self):
         return self.order

@@ -8,7 +8,7 @@ class ProductModel(models.Model):
     price=models.CharField(max_length=15)
     create_date=models.DateTimeField(auto_now=True)
     newprice=models.CharField(max_length=15)
-    count=models.PositiveIntegerField(default=0)
+    product_count=models.PositiveIntegerField(default=0)
     discount=models.PositiveIntegerField(default=0)
 
 

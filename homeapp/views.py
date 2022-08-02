@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from shopapp.models import  AdvertisModel
+from shopapp.models import  AdvertisModel, CartModel
 from homeapp.models import ProductModel
 from datetime import datetime
 # delta=timedelta(
@@ -39,11 +39,31 @@ def index(request):
     maxdiscount=max(productdiscount)
     max_productmodel_discount=ProductModel.objects.filter(discount=maxdiscount)
 
-    print('max_productmodel_discount',max_productmodel_discount)
    
     # <!-- Feature product area start -->
-        
-        
+    if request.method=='POST':
+
+        cartid=int(request.POST.get('cartid'))
+        title=ProductModel.objects.get(id=cartid)
+        price=title.price
+        image=title.image
+        cart_count=title.product_count
+        owner=request.user
+        modelcart=CartModel.objects.create(
+            title=title,
+            price=price,
+            image=image,
+            cart_count=cart_count,
+            owner=owner
+        )
+        if modelcart:
+            modelcart.save()
+    
+    
+
+    # product part cart 
+    productcart=ProductModel.objects.all().order_by('-create_date')[:3]
+    # product end part cart
 
     context={
             'advertismodel':advertismodel,
@@ -54,7 +74,8 @@ def index(request):
             'productlastsecond':productlastsecond,
             'date_time':date_time,
             'minproduct':minproduct,
-            'max_productmodel_discount':max_productmodel_discount
+            'max_productmodel_discount':max_productmodel_discount,
+            'productcart':productcart,
 
             }
     # for i in productmodel_top_rated:
