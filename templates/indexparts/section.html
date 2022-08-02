@@ -263,10 +263,15 @@
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6">
+                
+                {% for post in max_productmodel_discount %}
+                    
+               
+                    
                 <div class="feature-right-content">
 
                     <div class="image-side">
-                        <img src={{ product_area_minprice.image.url }} alt=""> 
+                        <img src={{ post.image.url }} alt=""> 
                         <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
                             class="pe-7s-shopbag"></i></button>
                     </div>
@@ -279,22 +284,22 @@
 
 
                         <div class="prize-content">
-                            <h5 class="title"><a href="single-product.html">{{ product_area_minprice.title }}</a></h5>
+                            <h5 class="title"><a href="single-product.html">{{ post.title }}</a></h5>
                             <span class="price">
-                    <span class="old">$ {{ product_area_minprice.price }}</span>
-                            <span class="new">${{ product_area_minprice.newprice }}</span>
+                    <span class="old">$ {{ post.price }}</span>
+                            <span class="new">${{ post.newprice }}</span>
                             </span>
                         </div>
                         <div class="product-feature">
                             <ul>
-                                <li>Predecessor : <span>None.</span></li>
+                                <li>the best over discount : <span>%{{ post.discount }}</span></li>
                                 <li>Support Type : <span>Neutral.</span></li>
                                 <li>Cushioning : <span>High Energizing.</span></li>
                                 <li>Total Weight : <span> 300gm</span></li>
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> {% endfor %}
                 
                 {% for post in minproduct %}
                     
@@ -427,26 +432,26 @@
 </div>
 <!-- Testimonial area end-->
 <!-- Brand area start -->
-<div class="brand-area pt-100px pb-100px">
+<!-- <div class="brand-area pt-100px pb-100px">
     <div class="container">
         <div class="brand-slider swiper-container">
             <div class="swiper-wrapper align-items-center">
                 <div class="swiper-slide brand-slider-item text-center">
-                    <a href="#"><img class=" img-fluid" src="assets/images/partner/1.png" alt="" /></a>
+                    <a href="#"><img class=" img-fluid" src="{% static  'bacground/partner/1.png' %}" alt="" /></a>
                 </div>
                 <div class="swiper-slide brand-slider-item text-center">
-                    <a href="#"><img class=" img-fluid" src="assets/images/partner/2.png" alt="" /></a>
+                    <a href="#"><img class=" img-fluid" src="{% static  'bacground/partner/2.png' %}" alt="" /></a>
                 </div>
                 <div class="swiper-slide brand-slider-item text-center">
-                    <a href="#"><img class=" img-fluid" src="assets/images/partner/3.png" alt="" /></a>
+                    <a href="#"><img class=" img-fluid" src="{% static  'bacground/partner/3.png' %}" alt="" /></a>
                 </div>
                 <div class="swiper-slide brand-slider-item text-center">
-                    <a href="#"><img class=" img-fluid" src="assets/images/partner/4.png" alt="" /></a>
+                    <a href="#"><img class=" img-fluid" src="{% static  'bacground/partner/4.png' %}" alt="" /></a>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- Brand area end -->
 <!-- Blog area start from here -->
 <div class="main-blog-area pb-100px">
@@ -465,15 +470,15 @@
             <div class="col-lg-6 col-sm-6 mb-xs-30px">
                 <div class="single-blog">
                     <div class="blog-image">
-                        <a href="blog-single-left-sidebar.html"><img src="assets/images/blog-image/1.webp" class="img-responsive w-100" alt=""></a>
+                        <a href="blog-single-left-sidebar.html"><img src="{{ productlastsecond.image.url }}" class="img-responsive w-100" alt=""></a>
                     </div>
                     <div class="blog-text">
                         <div class="blog-athor-date line-height-1">
-                            <span class="blog-date"><i class="fa fa-calendar" aria-hidden="true"></i> 27,Jun 2030</span>
-                            <span><a class="blog-author" href="blog-grid.html"><i class="fa fa-user" aria-hidden="true"></i> Wild Nick</a></span>
+                            <span class="blog-date"><i class="fa fa-calendar" aria-hidden="true"></i> {{ productlastsecond.create_date }}</span>
                         </div>
                         <h5 class="blog-heading"><a class="blog-heading-link" href="blog-single-left-sidebar.html">10 Quick Tips About Smart Product</a></h5>
-                        <p>Lorem ipsum dolor sit amet consl adipisi elit, sed do eiusmod templ incididunt ut labore</p>
+                            <span><a class="blog-author" href="blog-grid.html"><i class="fa fa-user" aria-hidden="true"></i> </a></span>
+                        <p>{{ productlastsecond.title }}</p>
                         <a href="blog-single-left-sidebar.html" class="btn btn-primary blog-btn"> Read More</a>
                     </div>
                 </div>
@@ -482,15 +487,14 @@
             <div class="col-lg-6 col-sm-6">
                 <div class="single-blog">
                     <div class="blog-image">
-                        <a href="blog-single-left-sidebar.html"><img src="assets/images/blog-image/2.webp" class="img-responsive w-100" alt=""></a>
+                        <a href="blog-single-left-sidebar.html"><img src="{{ product_model_area.image.url }}" class="img-responsive w-100" alt=""></a>
                     </div>
                     <div class="blog-text">
                         <div class="blog-athor-date line-height-1">
-                            <span class="blog-date"><i class="fa fa-calendar" aria-hidden="true"></i> 27,Jun 2030</span>
-                            <span><a class="blog-author" href="blog-grid.html"><i class="fa fa-user" aria-hidden="true"></i> Oaklee Odom</a></span>
+                            <span class="blog-date"><i class="fa fa-calendar" aria-hidden="true"></i> {{ product_model_area.create_date }}</span>
                         </div>
                         <h5 class="blog-heading"><a class="blog-heading-link" href="blog-single-left-sidebar.html">5 Real-Life Lessons About Smart Product</a></h5>
-                        <p>Lorem ipsum dolor sit amet consl adipisi elit, sed do eiusmod templ incididunt ut labore</p>
+                        <p>{{ product_model_area.title }}</p>
                         <a href="blog-single-left-sidebar.html" class="btn btn-primary blog-btn"> Read More</a>
                     </div>
                 </div>

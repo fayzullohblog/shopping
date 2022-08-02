@@ -1,4 +1,3 @@
-import re
 from django.shortcuts import render
 from shopapp.models import  AdvertisModel
 from homeapp.models import ProductModel
@@ -19,7 +18,10 @@ def index(request):
     # productmodel_top_ratedning eng  kuringan va like bosilganlarni qilib pages junatiladi
     # <!-- Section Title & Tab End -->
     # <!-- Feature product area start -->
+
+    #  narxi eng arzon maxsulatni filter qilish
     product_model_area=ProductModel.objects.last()
+    productlastsecond=ProductModel.objects.get(id=product_model_area.id-1)
     product_area_minprice=ProductModel.objects.all()
     productprice=[]
     for i in range(1,product_area_minprice.count()+1):
@@ -28,14 +30,16 @@ def index(request):
 
     minprice=min(productprice)
     minproduct=ProductModel.objects.filter(price=minprice)
-    print('minprice',minprice)
-    print('minprocut',minproduct)
-    print('----',product_model_area)
 
+    #     foizi eng katta bulgan maxsulatni filter qilish
 
+    productdiscount=[]
+    for i in range(1,ProductModel.objects.all().count()+1):
+        productdiscount.append(int((ProductModel.objects.get(id=i).discount)))
+    maxdiscount=max(productdiscount)
+    max_productmodel_discount=ProductModel.objects.filter(discount=maxdiscount)
 
-    # print('----',product_model_area)
-    
+    print('max_productmodel_discount',max_productmodel_discount)
    
     # <!-- Feature product area start -->
         
@@ -47,9 +51,11 @@ def index(request):
             'productmodel_new_arrivals':productmodel_new_arrivals,
             'productmodel_top_rated':productmodel_top_rated,
             'product_model_area':product_model_area,
+            'productlastsecond':productlastsecond,
             'date_time':date_time,
             'minproduct':minproduct,
-            
+            'max_productmodel_discount':max_productmodel_discount
+
             }
     # for i in productmodel_top_rated:
 
