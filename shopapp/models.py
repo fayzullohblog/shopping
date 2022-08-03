@@ -60,7 +60,7 @@ class CartModel(models.Model):
    
   
     def __str__(self):
-        return self.order
+        return self.title
 
 
 class CartItimModel(models.Model):

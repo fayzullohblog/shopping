@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import redirect, render
 from shopapp.models import  AdvertisModel, CartModel
 from homeapp.models import ProductModel
 from datetime import datetime
@@ -49,20 +50,26 @@ def index(request):
         image=title.image
         cart_count=title.product_count
         owner=request.user
-        modelcart=CartModel.objects.create(
+       
+        print(cartid,title,price,image,cart_count,owner)
+        CartModel.objects.create(
             title=title,
             price=price,
             image=image,
             cart_count=cart_count,
-            owner=owner
+            owner=owner,
         )
-        if modelcart:
-            modelcart.save()
+        return redirect('indexview')
     
+    # if request.method=='POST':
+    #     deleteid=int(request.POST.get('deleteid'))
+    #     CartModel.delete(id=deleteid)
+    #     return redirect('indexview')
+        
     
-
     # product part cart 
     productcart=ProductModel.objects.all().order_by('-create_date')[:3]
+    cartmodel=CartModel.objects.all()[:3]
     # product end part cart
 
     context={
@@ -75,22 +82,18 @@ def index(request):
             'date_time':date_time,
             'minproduct':minproduct,
             'max_productmodel_discount':max_productmodel_discount,
-            'productcart':productcart,
-
+            'cartmodel':cartmodel,
+            'cartcount':CartModel.objects.all().count()
             }
     # for i in productmodel_top_rated:
 
     
-        
-   
-   
-
-
-
-
-    
     return render(request=request,template_name='index.html',context=context)
- 
+def deleteView(request, id):
+    cart = CartModel.objects.get(id=id)
+    cart.delete()
+    return HttpResponseRedirect('/')
+
 def index2(request):
     return render(request=request,template_name='index2.html')
 
@@ -145,3 +148,6 @@ def compareview(request):
 
 def accounteview(request):
     return render(request=request,template_name='account.html')
+
+
+

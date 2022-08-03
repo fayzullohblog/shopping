@@ -59,8 +59,9 @@
         </div>
         <div class="body customScroll">
             <ul class="minicart-product-list">
-                
-                {% for post  in productcart %}
+                <form method='POST'>
+                    {% csrf_token %}
+                    {% for post  in cartmodel %}
                     
                
                 
@@ -69,13 +70,16 @@
                     <a href="single-product.html" class="image"><img src="{{ post.image.url }}" alt="Cart product Image"></a>
                     <div class="content">
                         <a href="single-product.html" class="title">{{ post.title }}</a>
-                        <span class="quantity-price">{{ post.product_count }} x <span class="amount">${{ post.price }}</span></span>
-                        <a href="#" class="remove">×</a>
+                        <span class="quantity-price">{{ post.cart_count }} x <span class="amount">${{ post.price }}</span></span>
+                        <a href="{% url 'deleteview' post.id %}" style="color:red">delete</a>
+                        <!-- <input type="hidden" name="deleteid" value={{ post.id }}>
+                        <button type="submit" >x</button> -->
+                       
+                        
                     </div>
                 </li> 
-                
                 {% endfor %}
-               
+               </form>
             </ul>
         </div>
         <div class="foot">
