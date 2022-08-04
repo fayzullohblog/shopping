@@ -58,6 +58,7 @@ def index(request):
             image=image,
             cart_count=cart_count,
             owner=owner,
+            create_date=datetime.now()
         )
         return redirect('indexview')
     
@@ -69,7 +70,7 @@ def index(request):
     
     # product part cart 
     productcart=ProductModel.objects.all().order_by('-create_date')[:3]
-    cartmodel=CartModel.objects.all()[:3]
+    cartmodel=CartModel.objects.all().order_by('-create_date')[:3]
     # product end part cart
 
     context={
@@ -94,8 +95,52 @@ def deleteView(request, id):
     cart.delete()
     return HttpResponseRedirect('/')
 
+def cartview(request):
+    cartmodel=CartModel.objects.all().order_by('-create_date')[:3]
+    totalcart=''
+    if request.method=='post':
+        totalcart=int(request.POST.get('totalcart'))
+
+    context={
+            'cartmodel':cartmodel,
+            'totalcart':totalcart,
+            }
+    return render(request=request,template_name='shopes/cart.html',context=context)
+     
+
 def index2(request):
     return render(request=request,template_name='index2.html')
+
+def wishlistview(request):
+    return render(request=request,template_name='pages/wishlist.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def aboutview(request):

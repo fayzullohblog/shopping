@@ -6,7 +6,7 @@
             <div class="row justify-content-between align-items-center">
                 <div class="col">
                     <div class="welcome-text">
-                        <li><a href="#"><i class="fa fa-user"></i> logout</a></li>__
+                        <li><a href="{% url 'logoutview' %}"><i class="fa fa-user"></i> logout</a></li>__
                         <li><a href="{% url 'loginview' %}"><i class="fa fa-user"></i> Login</a></li>__
                         <li><a href="{% url 'registerview' %}"><i class="fa fa-user"></i>SignUp</a></li>
 
@@ -122,7 +122,7 @@
                                 <li class="d-flex">
                                     <ul class="d-block">
                                         <li class="title"><a href="#">Inner Pages</a></li>
-                                        <li><a href="{% url 'ordertrackingview' %}">Order Tracking</a></li>
+                                        <li><a href="{% url 'wishlistview' %}">Wishh List</a></li>
                                     </ul>
                                     <ul class="d-block">
                                         <li class="title"><a href="#">Other Shop Pages</a></li>

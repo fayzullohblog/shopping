@@ -57,6 +57,7 @@ class CartModel(models.Model):
     price=models.CharField(max_length=15)
     cart_count=models.PositiveIntegerField(default=0)
     owner=models.CharField(max_length=50,null=True,blank=True)
+    create_date=models.DateTimeField(auto_now=True)
    
   
     def __str__(self):
@@ -68,7 +69,7 @@ class CartItimModel(models.Model):
     cart=models.ForeignKey(CartModel,on_delete=models.SET_NULL,null=True)
     count=models.IntegerField()
     total=models.IntegerField()
-    order_time=models.DateTimeField(auto_now=True)
+    order_time=models.DateTimeField(auto_now=True,blank=True,null=True)
 
     def __str__(self):
         return self.total

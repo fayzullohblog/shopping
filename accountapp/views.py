@@ -61,10 +61,10 @@ def registerview(request):
 
         else:
             user=UserModel.objects.create(
-                username=username,
-                password=password,
-                email=email,
-                telephone=telephone
+                    username=username,
+                    password=password,
+                    email=email,
+                    telephone=telephone,
                 )
             print('email',email)
       
@@ -77,7 +77,7 @@ def registerview(request):
        
 def logoutview(request):
     logout(request=request)
-    return redirect('indexview')
+    return redirect('loginview')
 
      
 
