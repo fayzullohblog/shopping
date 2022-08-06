@@ -1,97 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-       <!-- offcanvas overlay start -->
-       <div class="offcanvas-overlay"></div>
-       <!-- offcanvas overlay end -->
-       <!-- OffCanvas Wishlist Start -->
-       <div id="offcanvas-wishlist" class="offcanvas offcanvas-wishlist">
-           <div class="inner">
-               <div class="head">
-                   <span class="title">Wishlist</span>
-                   <button class="offcanvas-close">×</button>
-               </div>
-               <div class="body customScroll">
-                   <ul class="minicart-product-list">
-                       <li>
-                           <a href="single-product.html" class="image"><img src="assets/images/product-image/1.webp" alt="Cart product Image"></a>
-                           <div class="content">
-                               <a href="single-product.html" class="title">Modern Smart Phone</a>
-                               <span class="quantity-price">1 x <span class="amount">$21.86</span></span>
-                               <a href="#" class="remove">×</a>
-                           </div>
-                       </li>
-                       <li>
-                           <a href="single-product.html" class="image"><img src="assets/images/product-image/2.webp" alt="Cart product Image"></a>
-                           <div class="content">
-                               <a href="single-product.html" class="title">Bluetooth Headphone</a>
-                               <span class="quantity-price">1 x <span class="amount">$13.28</span></span>
-                               <a href="#" class="remove">×</a>
-                           </div>
-                       </li>
-                       <li>
-                           <a href="single-product.html" class="image"><img src="assets/images/product-image/3.webp" alt="Cart product Image"></a>
-                           <div class="content">
-                               <a href="single-product.html" class="title">Smart Music Box</a>
-                               <span class="quantity-price">1 x <span class="amount">$17.34</span></span>
-                               <a href="#" class="remove">×</a>
-                           </div>
-                       </li>
-                   </ul>
-               </div>
-               <div class="foot">
-                   <div class="buttons">
-                       <a href="wishlist.html" class="btn btn-dark btn-hover-primary mt-30px">view wishlist</a>
-                   </div>
-               </div>
-           </div>
-       </div>
-       <!-- OffCanvas Wishlist End -->
-       <!-- OffCanvas Cart Start -->
-       <div id="offcanvas-cart" class="offcanvas offcanvas-cart">
-           <div class="inner">
-               <div class="head">
-                   <span class="title">Cart</span>
-                   <button class="offcanvas-close">×</button>
-               </div>
-               <div class="body customScroll">
-                   <ul class="minicart-product-list">
-                       <li>
-                           <a href="single-product.html" class="image"><img src="assets/images/product-image/1.webp" alt="Cart product Image"></a>
-                           <div class="content">
-                               <a href="single-product.html" class="title">Modern Smart Phone</a>
-                               <span class="quantity-price">1 x <span class="amount">$18.86</span></span>
-                               <a href="#" class="remove">×</a>
-                           </div>
-                       </li>
-                       <li>
-                           <a href="single-product.html" class="image"><img src="assets/images/product-image/2.webp" alt="Cart product Image"></a>
-                           <div class="content">
-                               <a href="single-product.html" class="title">Bluetooth Headphone</a>
-                               <span class="quantity-price">1 x <span class="amount">$43.28</span></span>
-                               <a href="#" class="remove">×</a>
-                           </div>
-                       </li>
-                       <li>
-                           <a href="single-product.html" class="image"><img src="assets/images/product-image/3.webp" alt="Cart product Image"></a>
-                           <div class="content">
-                               <a href="single-product.html" class="title">Smart Music Box</a>
-                               <span class="quantity-price">1 x <span class="amount">$37.34</span></span>
-                               <a href="#" class="remove">×</a>
-                           </div>
-                       </li>
-                   </ul>
-               </div>
-               <div class="foot">
-                   <div class="buttons mt-30px">
-                       <a href="cart.html" class="btn btn-dark btn-hover-primary mb-30px">view cart</a>
-                       <a href="checkout.html" class="btn btn-outline-dark current-btn">checkout</a>
-                   </div>
-               </div>
-           </div>
-       </div>
-       <!-- OffCanvas Cart End -->
-     
+
        <!-- breadcrumb-area start -->
        <div class="breadcrumb-area">
            <div class="container">
@@ -115,7 +25,7 @@
                <h3 class="cart-page-title">Your cart items</h3>
                <div class="row">
                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                       <form action="#">
+                   
                            <div class="table-content table-responsive cart-table-content">
                                <table>
                                    <thead>
@@ -131,7 +41,8 @@
                                    <tbody>
                                       <form method="POST" >
                                     {% csrf_token %}
-                                    {% for post  in cartmodel %}
+                                    
+                                    {% for post  in cartmodel  %}
                                            <tr>
                                            <td class="product-thumbnail">
                                                <a href="#"><img class="img-responsive ml-15px" src="{{ post.image.url }}" alt="" /></a>
@@ -140,13 +51,13 @@
                                            <td class="product-price-cart"><span class="amount">${{ post.price }}</span></td>
                                            <td class="product-quantity">
                                          
-                                                   <input class="cart-plus-minus-box" type="text" name="totalcart" placeholder="how much can you buy " />
+                                                   <input type="number" name="totalcart" placeholder="how much can you buy " />
                                                    
                                            </td>
-                                           <td class="product-subtotal">{{ post.price }}  </td>
+                                           <td class="product-subtotal">{{ post.price  }} </td>
                                            <td class="product-remove">
-                                               <a href="#"><i class="fa fa-pencil"></i></a>
-                                               <a href="#"><i class="fa fa-times"></i></a>
+                                               <!-- <a href="#"><i class="fa fa-pencil"></i></a> -->
+                                               <a href="{% url 'delete' post.id %}">del</a>
                                                <button type="submit" > save</button>
                                            </td>
                                        </tr>
@@ -163,16 +74,18 @@
                                <div class="col-lg-12">
                                    <div class="cart-shiping-update-wrapper">
                                        <div class="cart-shiping-update">
-                                           <a href="#">Continue Shopping</a>
+                                           
                                        </div>
                                        <div class="cart-clear">
-                                           <button>Update Shopping Cart</button>
-                                           <a href="#">Clear Shopping Cart</a>
+                                        <form method ='POST'>
+                                            {% csrf_token %}
+                                           <button type="submit" style="color:brown" >Clear Shopping Cart</button> 
+                                        </form>
                                        </div>
                                    </div>
                                </div>
                            </div>
-                       </form>
+                  
                        <div class="row">
                            <div class="col-lg-4 col-md-6 mb-lm-30px">
                                <div class="cart-tax">
@@ -224,10 +137,10 @@
                                    </div>
                                    <div class="discount-code">
                                        <p>Enter your coupon code if you have one.</p>
-                                       <form>
+                         
                                            <input type="text" required="" name="name" />
                                            <button class="cart-btn-2" type="submit">Apply Coupon</button>
-                                       </form>
+                                    
                                    </div>
                                </div>
                            </div>

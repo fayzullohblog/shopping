@@ -74,6 +74,7 @@ class CartItimModel(models.Model):
     def __str__(self):
         return self.total
 
+
 class AdvertisModel(models.Model):
     image=models.ImageField(upload_to='AdvertisModel_Image')
     title=models.CharField(max_length=150)

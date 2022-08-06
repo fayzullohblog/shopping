@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import (accounteview, cartview, deleteView, faqview, index, index2,aboutview, 
-ordertrackingview, page404view,comingsoonview,cartpageview,checkoutview,contactview,
+from .views import (accounteview, cartview, deleteView, deletecart, faqview, index, index2,aboutview, 
+ordertrackingview, page404view,comingsoonview,checkoutview,contactview,
 empatycartview,shop_list_leftview,singleproductview,productgaleryview,compareview, wishlistview,)
 
 urlpatterns = [
@@ -11,7 +11,7 @@ urlpatterns = [
     path('ordertracking/',ordertrackingview ,name='ordertrackingview'),
     path('faq/',faqview ,name='faqview'),
     path('coming_soon/',comingsoonview,name='comingsoonview'),
-    path('cartpageview/',cartpageview,name='cartpageview'),
+    # path('cartpageview/',cartpageview,name='cartpageview'),
     path('checkout/',checkoutview,name='checkoutview'),
     path('contact/',contactview,name='contactview'),
     path('empatycart/',empatycartview,name='empatycartview'),
@@ -23,7 +23,9 @@ urlpatterns = [
     path('delete/<int:id>/',deleteView,name='deleteview'),
     path('wishlist/',wishlistview,name='wishlistview'),
     path('wishlist/',wishlistview,name='wishlistview'),
-    path('cart/',cartview,name='cartview')
+    path('cart/',cartview,name='cartview'),
+    path('cart/<int:id>/',deletecart,name='delete'),
+
 
     
 

@@ -321,18 +321,31 @@
                                         </span>
                                     </div>
                                     <div class="actions">
+                                     <form method="POST">
+                                        
+                                        {% csrf_token %}
+                                        <input type="hidden" name="cartid" value={{ post.id }}>
+                                        <button type="submit" title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
+                                        class="pe-7s-shopbag"></i></button>
+                                       </form> 
+                                        <form method='POST'>
+                                        {% csrf_token %}
+                                           
+                                        <input type="hidden" name="productid" value="{{ post.id }}">
+                                        <button type="submit" class="action wishlist" title="Wishlist" data-product="{{ post.id }}" data-bs-target="#exampleModal-Wishlist"><i
+                                        class="pe-7s-like"></i></button>
+                                        </form>
                                         <form method="POST">
                                             {% csrf_token %}
-                                            <input type="hidden" name="cartid" value={{ post.id }}>
-                                            <button type="submit" title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                                                class="pe-7s-shopbag"></i></button>
+                                            <input type="hidden" name="viewid" value="{{ postis }}">
+                                            <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
+                                            <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
+                                            class="pe-7s-refresh-2"></i></button>
+
+
+                                        </form>
                                         
-                                            </form>
-                                        <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
-                                                class="pe-7s-like"></i></button>
-                                        <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-                                        <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
-                                                class="pe-7s-refresh-2"></i></button>
+                                   
                                     </div>
                                 </div>
                             </div>

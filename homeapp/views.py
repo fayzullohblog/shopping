@@ -1,7 +1,8 @@
+from itertools import product
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from shopapp.models import  AdvertisModel, CartModel
-from homeapp.models import ProductModel
+from homeapp.models import LikeModel, ProductModel
 from datetime import datetime
 # delta=timedelta(
 #    hours=8,
@@ -16,11 +17,7 @@ def index(request):
     productmodel_new_arrivals=ProductModel.objects.all().order_by('-create_date')[:8]
     productmodel_top_rated=ProductModel.objects.all()
     date_time=datetime(year=1,month=2,day=2,hour=4,minute=50,second=20,microsecond=34354)
-    # productmodel_top_ratedning eng  kuringan va like bosilganlarni qilib pages junatiladi
-    # <!-- Section Title & Tab End -->
-    # <!-- Feature product area start -->
 
-    #  narxi eng arzon maxsulatni filter qilish
     product_model_area=ProductModel.objects.last()
     productlastsecond=ProductModel.objects.get(id=product_model_area.id-1)
     product_area_minprice=ProductModel.objects.all()
@@ -42,9 +39,11 @@ def index(request):
 
    
     # <!-- Feature product area start -->
-    if request.method=='POST':
+    if request.method=='POST' and request.POST.get('cartid'):
 
-        cartid=int(request.POST.get('cartid'))
+        cartid=request.POST.get('cartid')
+        
+        print(cartid)
         title=ProductModel.objects.get(id=cartid)
         price=title.price
         image=title.image
@@ -62,12 +61,24 @@ def index(request):
         )
         return redirect('indexview')
     
-    # if request.method=='POST':
-    #     deleteid=int(request.POST.get('deleteid'))
-    #     CartModel.delete(id=deleteid)
-    #     return redirect('indexview')
+    elif request.method=='POST' and request.user.is_authenticated:
+        productid=request.POST.get('productid')
+        product=ProductModel.objects.get(id=int(productid))
         
-    
+       
+        try:
+            likemodel=LikeModel.objects.get(owner=request.user,product=product)
+            likemodel.delete()
+        except:
+            
+            product=ProductModel.objects.get(id=request.POST.get('productid'))
+            owner=request.user
+            LikeModel.objects.create(
+                owner=owner,
+                product=product,
+            )
+
+
     # product part cart 
     productcart=ProductModel.objects.all().order_by('-create_date')[:3]
     cartmodel=CartModel.objects.all().order_by('-create_date')[:3]
@@ -98,45 +109,33 @@ def deleteView(request, id):
 def cartview(request):
     cartmodel=CartModel.objects.all().order_by('-create_date')[:3]
     totalcart=''
-    if request.method=='post':
-        totalcart=int(request.POST.get('totalcart'))
-
+    print('-------1')
+    if request.method=='POST':
+        print('000000000',request.POST)
+        totalcart=request.POST.get('totalcart')
+    
+        
+    if request.method=="POST":
+        cartmodel=CartModel.objects.all()
+        cartmodel.delete()
+        return HttpResponseRedirect('/cart/')
     context={
             'cartmodel':cartmodel,
             'totalcart':totalcart,
             }
     return render(request=request,template_name='shopes/cart.html',context=context)
-     
+
+def deletecart(request,id):
+    cartmodel=CartModel.objects.get(id=id)
+    cartmodel.delete()
+    return HttpResponseRedirect('/cart/')
+    
 
 def index2(request):
     return render(request=request,template_name='index2.html')
 
 def wishlistview(request):
     return render(request=request,template_name='pages/wishlist.html')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -157,8 +156,8 @@ def faqview(request):
 def comingsoonview(request):
     return render(request=request,template_name='pages/comingsoon.html')
 
-def cartpageview(request):
-    return render(request=request,template_name='pages/cartpage.html')
+# def cartpageview(request):
+#     return render(request=request,template_name='pages/cartpage.html')
 
 def checkoutview(request):
     return render(request=request,template_name='pages/checkout.html')

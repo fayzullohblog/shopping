@@ -38,13 +38,11 @@ class CommentModel(models.Model):
 
 
 class LikeModel(models.Model):
-    like=models.CharField(max_length=6)
-    dislike=models.CharField(max_length=8)
     owner=models.ForeignKey(UserModel,related_name='likemodels',on_delete=models.SET_NULL,null=True)
     product=models.ForeignKey(ProductModel,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.like
+        return self.owner
 
 class CategoryModel(models.Model):
     title=models.CharField(max_length=100)
