@@ -112,9 +112,7 @@
                 <div class="main-menu position-relative">
                     <ul>
                         <li class="dropdown"><a href="{% url 'indexview' %}">Home <i class="fa fa-angle-down"></i></a>
-                            <ul class="sub-menu">
-                                <li><a href="{% url 'indexview' %}">Home 1</a></li>
-                            </ul>
+                           
                         </li>
                         <li><a href="{% url 'aboutview' %}">About</a></li>
                         <li class="dropdown position-static"><a href="about.html">Pages <i class="fa fa-angle-down"></i></a>
@@ -140,32 +138,9 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="dropdown position-static"><a href="#">Shop <i
-                            class="fa fa-angle-down"></i></a>
-                            <ul class="mega-menu d-block">
-                                <li class="d-flex">
-                                    <ul class="d-block">
-                                        <li class="title"><a href="#">Shop Page</a></li>
-                                        <li><a href="{% url 'shop_list_leftview' %}">Shop List Left Sidebar</a>
-                                        </li>
-                                        </li>
-                                    </ul>
-                                    <ul class="d-block">
-                                        <li class="title"><a href="#">product Details Page</a></li>
-                                        <li><a href="{% url 'singleproductview' %}">Product Affiliate</a></li>
-                                    </ul>
-                                    <ul class="d-block">
-                                        <li class="title"><a href="#">Single Product Page</a></li>
-                                        <li><a href="{% url 'productgaleryview' %}">Product galery </a></li>
-                                        </li>
-                                      
-                                    </ul>
-                                    <ul class="d-block p-0 border-0">
-                                        <li class="title"><a href="#">Single Product Page</a></li>
-                                        <li><a href="{% url 'compareview' %}">Compare Page</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                        <li class="dropdown position-static"><a href="{% url 'shop_list_leftview' %}">Shop
+                         </a>
+                           
                         </li>
                         <li class="dropdown "><a href="#">Blog <i class="fa fa-angle-down"></i></a>
                             <ul class="sub-menu">

@@ -6,3 +6,5 @@ admin.site.register(PostModel)
 admin.site.register(CommentModel)
 admin.site.register(LikeModel)
 admin.site.register(CategoryModel)
+admin.site.register(ColorModel)
+

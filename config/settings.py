@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'homeapp',
     'accountapp',
     'shopapp',
+    # outside app
+    'colorfield',
 ]
 
 MIDDLEWARE = [

@@ -1,5 +1,7 @@
+from secrets import choice
 from django.db import models
 from accountapp.models import UserModel
+# from colorfield.fields import ColorField
 # Create your models here.
 class ProductModel(models.Model):
     title=models.CharField(max_length=50)
@@ -10,6 +12,14 @@ class ProductModel(models.Model):
     newprice=models.CharField(max_length=15)
     product_count=models.PositiveIntegerField(default=0)
     discount=models.PositiveIntegerField(default=0)
+    
+
+class ColorModel(models.Model):
+    name=models.CharField(max_length=20)
+    code=models.CharField(max_length=20)
+    def __str__(self):
+        return self.title
+    
 
 
     def __str__(self):
