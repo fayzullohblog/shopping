@@ -1,29 +1,35 @@
-from secrets import choice
 from django.db import models
 from accountapp.models import UserModel
+
 # from colorfield.fields import ColorField
 # Create your models here.
+class CategoryModel(models.Model):
+    title=models.CharField(max_length=100)
+    body=models.TextField()
+    image=models.ImageField(upload_to='CategoryModel_Image')
+    def __str__(self):
+        return self.title
+
 class ProductModel(models.Model):
+    category=models.ForeignKey(CategoryModel,related_name='producmodels',on_delete=models.CASCADE,null=True)
+    status=(('Publish','Publish'),('Draft','Draft'))
     title=models.CharField(max_length=50)
-    category=models.ForeignKey('CategoryModel',on_delete=models.CASCADE,null=True)
     image=models.ImageField(upload_to='ProductModel_Image')
-    price=models.CharField(max_length=15)
+    price=models.PositiveIntegerField()
+    color=models.ForeignKey('ColorModel',on_delete=models.CASCADE,null=True,blank=True)
     create_date=models.DateTimeField(auto_now=True)
     newprice=models.CharField(max_length=15)
     product_count=models.PositiveIntegerField(default=0)
     discount=models.PositiveIntegerField(default=0)
     
 
+    def __str__(self):
+        return self.title
 class ColorModel(models.Model):
-    name=models.CharField(max_length=20)
-    code=models.CharField(max_length=20)
-    def __str__(self):
-        return self.title
-    
-
+    color=models.CharField(max_length=20)
 
     def __str__(self):
-        return self.title
+        return self.color
 class PostModel(models.Model):
     owner=models.ForeignKey(UserModel,related_name='postmodels',on_delete=models.CASCADE)
     title=models.CharField(max_length=100)
@@ -54,10 +60,6 @@ class LikeModel(models.Model):
     def __str__(self):
         return self.owner
 
-class CategoryModel(models.Model):
-    title=models.CharField(max_length=100)
-    body=models.TextField()
-    image=models.ImageField(upload_to='CategoryModel_Image')
 
 
     def __str__(self):

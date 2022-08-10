@@ -1,9 +1,9 @@
-from itertools import product
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from shopapp.models import  AdvertisModel, CartModel
-from homeapp.models import LikeModel, ProductModel
+from homeapp.models import CategoryModel, LikeModel, ProductModel
 from datetime import datetime
+
 # delta=timedelta(
 #    hours=8,
 #    minutes=50,
@@ -43,14 +43,12 @@ def index(request):
 
         cartid=request.POST.get('cartid')
         
-        print(cartid)
         title=ProductModel.objects.get(id=cartid)
         price=title.price
         image=title.image
         cart_count=title.product_count
         owner=request.user
        
-        print(cartid,title,price,image,cart_count,owner)
         CartModel.objects.create(
             title=title,
             price=price,
@@ -109,10 +107,9 @@ def deleteView(request, id):
 def cartview(request):
     cartmodel=CartModel.objects.all().order_by('-create_date')[:3]
     totalcart=''
-    print('-------1')
     if request.method=='POST':
-        print('000000000',request.POST)
         totalcart=request.POST.get('totalcart')
+        
     
         
     if request.method=="POST":
@@ -130,6 +127,79 @@ def deletecart(request,id):
     cartmodel.delete()
     return HttpResponseRedirect('/cart/')
     
+def shop_list_leftview(request):
+    categories=CategoryModel.objects.all()
+    categories_count=categories.count()
+    
+    products=ProductModel.objects.all()
+    maxprice=''
+    categoryid1=''
+    
+    
+
+    
+    if request.method=='GET':
+        category_get=request.GET.get('category')
+        price_get=request.GET.get('price')
+        color_get=request.GET.get('color')
+        brand_get=request.GET.get('brand')
+        maxprice=request.GET.get('maxprice')
+        categoryid1=request.GET.get('category_get')
+        if price_get:
+            price_get
+        else:
+            price_get=''
+        
+        if color_get:
+            color_get
+        else:
+            color_get=''
+        
+        if brand_get:
+            brand_get
+        else:
+            color_get=''
+        
+        if categoryid1 or category_get or categoryid1 or price_get or color_get or brand_get:
+    
+            if category_get:
+
+                products=ProductModel.objects.filter(category=CategoryModel.objects.get(id=category_get))
+                if price_get and categoryid1:
+                
+                    products=ProductModel.objects.filter(category=CategoryModel.objects.get(id=categoryid1))
+                    products=products.filter(price__lt=int(price_get))
+            else:
+                products=ProductModel.objects.filter(category=CategoryModel.objects.get(id=categoryid1))
+                if maxprice and categoryid1:
+                    print('kirdi')
+                    category=CategoryModel.objects.get(id=categoryid1)
+              
+                    products=category.producmodels.filter(price__lt=int(maxprice))
+            
+    
+    
+    context={
+         
+        'categories':categories,
+        'categories_count':categories_count,
+        'maxprice':maxprice,
+        'products':products,
+        'category_get':category_get,
+        'categoryid1':categoryid1
+        
+        }
+    
+    return render(
+                request=request,
+                template_name='shopes/shop_list_left.html',
+                context=context,
+                )
+
+
+
+
+
 
 def index2(request):
     return render(request=request,template_name='index2.html')
@@ -177,8 +247,6 @@ def contactview(request):
 def empatycartview(request):
     return render(request=request,template_name='pages/empaty_cart.html')
 
-def shop_list_leftview(request):
-    return render(request=request,template_name='shopes/shop_list_left.html')
 
 def singleproductview(request):
     return render(request=request,template_name='shopes/shop_list_left.html')
