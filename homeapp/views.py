@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from shopapp.models import  AdvertisModel, CartModel
-from homeapp.models import CategoryModel, LikeModel, ProductModel
+from homeapp.models import CategoryModel, ColorModel, LikeModel, ProductModel
 from datetime import datetime
 
 # delta=timedelta(
@@ -130,8 +130,8 @@ def deletecart(request,id):
 def shop_list_leftview(request):
     categories=CategoryModel.objects.all()
     categories_count=categories.count()
-    
     products=ProductModel.objects.all()
+    colormodel=ColorModel.objects.all()
     maxprice=''
     categoryid1=''
     
@@ -145,6 +145,13 @@ def shop_list_leftview(request):
         brand_get=request.GET.get('brand')
         maxprice=request.GET.get('maxprice')
         categoryid1=request.GET.get('category_get')
+        colorid=request.GET.get('colorid')
+        colorcategoryid=request.GET.get('colorcategoryid')
+        colormaxprice=request.GET.get('colormaxprice')
+        print('colorcategoryid',colorcategoryid)
+        print('colormaxprice',colormaxprice)
+        print('colorid',colorid)
+
         if price_get:
             price_get
         else:
@@ -163,21 +170,43 @@ def shop_list_leftview(request):
         if categoryid1 or category_get or categoryid1 or price_get or color_get or brand_get:
     
             if category_get:
+                print('kirdi1')
 
                 products=ProductModel.objects.filter(category=CategoryModel.objects.get(id=category_get))
                 if price_get and categoryid1:
                 
                     products=ProductModel.objects.filter(category=CategoryModel.objects.get(id=categoryid1))
                     products=products.filter(price__lt=int(price_get))
+
+                    # if colorcategoryid and colormaxprice:
+                    #     products=ProductModel.objects.filter(color=colorid,price__lt=int(colormaxprice),category=colorcategoryid)
             else:
-                products=ProductModel.objects.filter(category=CategoryModel.objects.get(id=categoryid1))
-                if maxprice and categoryid1:
-                    print('kirdi')
-                    category=CategoryModel.objects.get(id=categoryid1)
-              
-                    products=category.producmodels.filter(price__lt=int(maxprice))
-            
-    
+                i=0
+                if categoryid1:
+                    i=i+1
+                    print('kirdi2',i)
+                    print('----categoryid1',categoryid1)
+                    products=ProductModel.objects.filter(category=CategoryModel.objects.get(id=categoryid1 ))
+                    if maxprice and categoryid1:
+                        category=CategoryModel.objects.get(id=categoryid1)
+                
+                        products=category.producmodels.filter(price__lt=int(maxprice))
+
+                        if price_get and categoryid1:
+                            
+                            products=ProductModel.objects.filter(category=CategoryModel.objects.get(id=categoryid1))
+                            products=products.filter(price__lt=int(price_get))
+                elif colorcategoryid:
+                    print('kirdi3')
+                    products=ProductModel.objects.filter(category=CategoryModel.objects.get(id=colorcategoryid ))
+                    if colormaxprice and colorcategoryid:
+                        category=CategoryModel.objects.get(id=colorcategoryid)
+                
+                        products=category.producmodels.filter(price__lt=int(colormaxprice))
+
+                        if colormaxprice and colorcategoryid:
+                            
+                            products=ProductModel.objects.filter(color=colorid,price__lt=int(colormaxprice),category=colorcategoryid)
     
     context={
          
@@ -186,7 +215,9 @@ def shop_list_leftview(request):
         'maxprice':maxprice,
         'products':products,
         'category_get':category_get,
-        'categoryid1':categoryid1
+        'categoryid1':categoryid1,
+        'colormodel':colormodel,
+        'colorid':colorid,
         
         }
     

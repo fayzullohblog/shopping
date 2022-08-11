@@ -27,6 +27,7 @@ class ProductModel(models.Model):
         return self.title
 class ColorModel(models.Model):
     color=models.CharField(max_length=20)
+    code=models.CharField(max_length=20)
 
     def __str__(self):
         return self.color
@@ -59,8 +60,6 @@ class LikeModel(models.Model):
 
     def __str__(self):
         return self.owner
-
-
 
     def __str__(self):
         return self.title

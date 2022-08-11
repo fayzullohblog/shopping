@@ -113,8 +113,7 @@ body[dir=rtl] {
 
 h1,
 h2,
-h3,
-h4,
+h3,,
 h5,
 h6 {
   font-family: "Poppins", sans-serif;
@@ -6559,7 +6558,7 @@ body.offcanvas-open {
   color: #266bf9;
 }
 .shop-sidebar-wrap .sidebar-widget-category li a,
-.shop-sidebar-wrap .sidebar-widget-color li a,
+.shop-sidebar-wrap .sidebar-widget-color .sidebar-widget-color li a,
 .shop-sidebar-wrap .sidebar-widget-size li a,
 .shop-sidebar-wrap .sidebar-widget-brand li a {
   color: #8a8a8a;
@@ -6570,58 +6569,59 @@ body.offcanvas-open {
   line-height: 1;
 }
 .shop-sidebar-wrap .sidebar-widget-category li a:hover,
-.shop-sidebar-wrap .sidebar-widget-color li a:hover,
+.shop-sidebar-wrap .sidebar-widget-color .sidebar-widget-color li a:hover,
 .shop-sidebar-wrap .sidebar-widget-size li a:hover,
 .shop-sidebar-wrap .sidebar-widget-brand li a:hover {
   color: #266bf9;
 }
-.shop-sidebar-wrap .sidebar-widget-color li a {
+
+.shop-sidebar-wrap .sidebar-widget-color .sidebar-widget-color li a {
   width: 14px;
   height: 14px;
   border-radius: 50%;
   margin: 0 0 0 10px;
 }
-.shop-sidebar-wrap .sidebar-widget-color li a.color-1 {
+.shop-sidebar-wrap .sidebar-widget-color .sidebar-widget-color li.color-1 {
   background-color: #39ed8c;
 }
-.shop-sidebar-wrap .sidebar-widget-color li a.color-2 {
-  background-color: #a6ed42;
+.shop-sidebar-wrap .sidebar-widget-color .sidebar-widget-color li.color-2 {
+  background-color: #ffffff;
 }
-.shop-sidebar-wrap .sidebar-widget-color li a.color-3 {
-  background-color: #daed39;
+.shop-sidebar-wrap .sidebar-widget-color .sidebar-widget-color li.color-3 {
+  background-color: #000000;
 }
-.shop-sidebar-wrap .sidebar-widget-color li a.color-4 {
+.shop-sidebar-wrap .sidebar-widget-color .sidebar-widget-color li.color-4 {
   background-color: #eed739;
 }
-.shop-sidebar-wrap .sidebar-widget-color li a.color-5 {
+.shop-sidebar-wrap .sidebar-widget-color .sidebar-widget-color li.color-5 {
   background-color: #eca23a;
 }
-.shop-sidebar-wrap .sidebar-widget-color li a.color-6 {
+.shop-sidebar-wrap .sidebar-widget-color .sidebar-widget-color  li.color-6 {
   background-color: #f36768;
 }
-.shop-sidebar-wrap .sidebar-widget-color li a.color-7 {
-  background-color: #e14755;
+.shop-sidebar-wrap .sidebar-widget-color .sidebar-widget-color li.color-7 {
+  background-color: #b91a1a;
 }
-.shop-sidebar-wrap .sidebar-widget-color li a.color-8 {
+.shop-sidebar-wrap .sidebar-widget-color .sidebar-widget-color li.color-8 {
   background-color: #dc83a3;
 }
-.shop-sidebar-wrap .sidebar-widget-color li a.color-9 {
+.shop-sidebar-wrap .sidebar-widget-color .sidebar-widget-color li.color-9 {
   background-color: #dc82da;
 }
-.shop-sidebar-wrap .sidebar-widget-color li a.color-10 {
+.shop-sidebar-wrap .sidebar-widget-color .sidebar-widget-color li.color-10 {
   background-color: #9a82dd;
 }
-.shop-sidebar-wrap .sidebar-widget-color li a.color-11 {
-  background-color: #82c2db;
+.shop-sidebar-wrap .sidebar-widget-color .sidebar-widget-color li.color-11 {
+  background-color: #0b2390;
 }
-.shop-sidebar-wrap .sidebar-widget-color li a.color-12 {
+.shop-sidebar-wrap .sidebar-widget-color .sidebar-widget-color li.color-12 {
   background-color: #6bd6b0;
 }
-.shop-sidebar-wrap .sidebar-widget-color li a.color-13 {
-  background-color: #9ed76b;
+.shop-sidebar-wrap .sidebar-widget-color .sidebar-widget-color li.color-13 {
+  background-color: #f6f9f2;
 }
-.shop-sidebar-wrap .sidebar-widget-color li a.color-14 {
-  background-color: #9ed76b;
+.shop-sidebar-wrap .sidebar-widget-color .sidebar-widget-color li.color-14 {
+  background-color: #b62110;
 }
 .shop-sidebar-wrap .sidebar-widget-size li a {
   font-weight: 500;
@@ -6629,7 +6629,7 @@ body.offcanvas-open {
 .shop-sidebar-wrap .sidebar-widget-brand li a {
   font-weight: 500;
 }
-.shop-sidebar-wrap .sidebar-widget h4 {
+.shop-sidebar-wrap .sidebar-widget {
   font-size: 18px;
   display: block;
   text-transform: capitalize;
@@ -6639,7 +6639,7 @@ body.offcanvas-open {
   margin: 35px 0 20px 0px;
   padding: 0 0 20px;
 }
-.shop-sidebar-wrap .sidebar-widget h4::after {
+.shop-sidebar-wrap .sidebar-widget::after {
   position: absolute;
   top: auto;
   bottom: 0;
@@ -7377,7 +7377,7 @@ body.offcanvas-open {
 .description-review-bottom .single-review .review-top-wrap .review-left .review-name {
   margin-right: 15px;
 }
-.description-review-bottom .single-review .review-top-wrap .review-left .review-name h4 {
+.description-review-bottom .single-review .review-top-wrap .review-left .review-name {
   font-size: 18px;
   margin: 0;
   line-height: 1;
@@ -7889,9 +7889,9 @@ body.offcanvas-open {
   z-index: 1;
 }
 
-.cart-tax .title-wrap h4.cart-bottom-title,
-.discount-code-wrapper .title-wrap h4.cart-bottom-title,
-.grand-totall .title-wrap h4.cart-bottom-title {
+.cart-tax .title-wrap.cart-bottom-title,
+.discount-code-wrapper .title-wrap.cart-bottom-title,
+.grand-totall .title-wrap.cart-bottom-title {
   display: inline-block;
   font-size: 18px;
   font-weight: 600;
@@ -8143,7 +8143,7 @@ body.offcanvas-open {
 .billing-info-wrap .additional-info-wrap {
   margin: 30px 0;
 }
-.billing-info-wrap .additional-info-wrap h4 {
+.billing-info-wrap .additional-info-wrap {
   font-size: 18px;
   font-weight: 600;
   color: #000000;
@@ -8264,7 +8264,7 @@ body.offcanvas-open {
 .your-order-area .payment-accordion:last-child {
   margin: 0 0 0;
 }
-.your-order-area .payment-accordion h4 a {
+.your-order-area .payment-accordion a {
   color: #000000;
   font-size: 16px;
   margin: 0;
@@ -8415,7 +8415,7 @@ body.offcanvas-open {
   margin-bottom: 28px;
   padding-bottom: 30px;
 }
-.single-my-account .myaccount-info-wrapper .account-info-wrapper h4 {
+.single-my-account .myaccount-info-wrapper .account-info-wrapper {
   font-size: 14px;
   margin: 0;
   text-transform: uppercase;
@@ -8583,7 +8583,7 @@ Pages - My Account
   background-color: #266bf9;
 }
 
-.dashboard_content h4 {
+.dashboard_content {
   font-size: 24px;
   text-transform: capitalize;
   font-weight: 600;
@@ -8773,10 +8773,10 @@ Pages - My Account
   transition: all 0.4s ease 0s;
   width: 1px;
 }
-.login-register-wrapper .login-register-tab-list a:hover h4 {
+.login-register-wrapper .login-register-tab-list a:hover {
   color: #266bf9 !important;
 }
-.login-register-wrapper .login-register-tab-list a h4 {
+.login-register-wrapper .login-register-tab-list a {
   font-size: 25px;
   font-weight: 500;
   margin: 0 20px;
@@ -8862,7 +8862,7 @@ Pages - My Account
   }
 }
 
-.login-register-wrapper .login-register-tab-list a.active h4 {
+.login-register-wrapper .login-register-tab-list a.active {
   color: #266bf9;
 }
 
@@ -9184,7 +9184,7 @@ Pages - My Account
 .faq-area .inner-descripe {
   margin-bottom: 30px;
 }
-.faq-area .inner-descripe h4 {
+.faq-area .inner-descripe {
   color: #000;
   font-size: 24px;
   font-weight: 500;
@@ -9192,7 +9192,7 @@ Pages - My Account
   line-height: 28px;
 }
 @media only screen and (max-width: 767px) {
-  .faq-area .inner-descripe h4 {
+  .faq-area .inner-descripe {
     font-size: 20px;
   }
 }
